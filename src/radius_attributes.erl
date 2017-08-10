@@ -94,14 +94,24 @@ fetch(Attribute, Attributes) ->
 			Value
 	end.
 
--spec find(Attribute :: byte(), Attributes :: attributes()) ->
+-spec find(Attribute :: byte()|list(), Attributes :: attributes()) ->
 	Result :: {ok, Value :: term()} | {error, not_found}.
 %% 	Attribute = integer()
 %% 	Attributes = attributes()
 %% 	Result = {ok, Value} | error
 %% 	Value = term()
 %% @doc Searches for an attribute in a RADIUS protocol attributes list.
+%%      Attribute to search can be either byte() or list of bytes in case of vendor
+%%      specific attributes
 %%
+find([?VendorSpecific, Vendor, VendorAttr], Attributes) ->
+    AllVendorSpecific = [X || {?VendorSpecific, X} <- Attributes] ,
+    case [ VendorAttrs || {V, {VA,VendorAttrs}} <- AllVendorSpecific, V == Vendor, VA == VendorAttr] of
+        [] ->
+            {error, not_found};
+        [Result] ->
+            {ok, Result}
+    end;
 find(Attribute, Attributes) ->
 	case lists:keyfind(Attribute, 1, Attributes) of
 		false ->
