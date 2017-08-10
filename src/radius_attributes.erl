@@ -372,6 +372,13 @@ attribute(?VendorSpecific, <<0, ?Microsoft:24, ?MsChap2Response, 52,
 	[{?VendorSpecific, {?Microsoft,
 			{?MsChap2Response, {Ident, Flags, PeerChallenge,
 			Reserved, Response}}}} | Acc];
+% Correct interpretation of MS-CHAP2-Response packet 
+attribute(?VendorSpecific, <<0, ?Microsoft:24, ?MsChap2Response, 52, 
+		Ident:8, Flags:8, PeerChallenge:16/binary,Reserved:8/binary,
+	        Response:24/binary, Rest/binary>>, Acc) ->
+	[{?VendorSpecific, {?Microsoft,
+			{?MsChap2Response, {Ident, Flags, PeerChallenge,
+			Reserved, Response}}}} | Acc];
 attribute(?VendorSpecific, <<0, ?Microsoft:24, ?MsChap2Success, 45, Ident,
 		Authenticator:42/binary>>, Acc) ->
 	[{?VendorSpecific, {?Microsoft,

@@ -1,3 +1,4 @@
+ebin
 # http://www.gnu.org/software/automake
 INSTALL
 Makefile.in
@@ -32,3 +33,28 @@ config.h.in~
 config.sub
 depcomp
 ltmain.sh
+
+# other generated files
+Makefile
+config.h
+config.log
+config.status
+doc/Makefile
+doc/edoc-info
+doc/erlang.png
+doc/index.html
+doc/modules-frame.html
+doc/overview-summary.html
+doc/overview.edoc
+doc/radius.html
+doc/radius_app.html
+doc/radius_attributes.html
+doc/radius_fsm.html
+doc/radius_fsm_sup.html
+doc/radius_server.html
+doc/radius_server_sup.html
+doc/radius_sup.html
+doc/stylesheet.css
+include/Makefile
+stamp-h1
+test/Makefile
